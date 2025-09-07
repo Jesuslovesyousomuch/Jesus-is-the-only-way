@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jesus is the Way</title>
+  <meta name="description" content="Pointing people to Jesus with daily Bible verses and quick links to six Bible versions." />
+  <meta name="theme-color" content="#002244" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Jesus is the Way" />
+  <meta property="og:description" content="A daily dose of your Bible verse in both Tagalog and English." />
+  <meta property="og:type" content="website" />
+  <meta property="twitter:card" content="summary_large_image" />
+
+  <!-- Performance preconnects -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================== THEME VARS ================== */
+    :root{
+      --brand-deep:#001f3f;
+      --brand-mid:#003366;
+      --brand-accent:#0ea5e9;
+      --brand-gold:#f5c542;
+      --ink:#1f2937;
+      --muted:#6b7280;
+      --paper:#f9fafb;
+      --card:#ffffff;
+      --ring: rgba(14,165,233,.35);
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 14px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --ink:#ffffff;
+        --muted:#cbd5e1;
+        --paper:#0b1220;
+        --card:#0f172a;
+        --brand-deep:#031a33;
+        --brand-mid:#052b52;
+      }
+    }
+
+    /* ================== RESET & BASE ================== */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 700px at 10% 0%, #eaf3ff 0%, transparent 60%),
+        radial-gradient(1000px 600px at 100% 20%, #eef7ff 0%, transparent 60%),
+        var(--paper);
+      color:var(--ink); line-height:1.6;
+    }
+    a{ text-decoration:none; color:inherit; }
+    h1,h2,h3{ margin-bottom:.75rem; }
+
+    /* ================== ACCESSIBILITY ================== */
+    .skip-link{
+      position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip-link:focus{
+      left:1rem; top:1rem; width:auto; height:auto; padding:.5rem .75rem; z-index:1100;
+      background:#fff; color:#000; border-radius:8px; box-shadow:var(--shadow);
+    }
+    :focus-visible{ outline:2px solid var(--ring); outline-offset:2px; border-radius:10px; }
+
+    /* ================== HEADER / NAV ================== */
+    header{
+      background: linear-gradient(45deg, var(--brand-deep), var(--brand-mid));
+      color:#fff; position:sticky; top:0; z-index:1000;
+      box-shadow: 0 6px 16px rgba(0,0,0,.18);
+    }
+    .nav-container{
+      max-width:1100px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.85rem 1rem;
+    }
+    .logo{ display:flex; align-items:center; gap:.6rem; font-size:1.35rem; font-weight:800; letter-spacing:.3px; }
+    .logo i{ color:var(--brand-gold); }
+
+    .menu-toggle{ display:none; border:none; background:transparent; color:#fff; font-size:1.35rem; }
+    nav ul{ list-style:none; display:flex; gap:1rem; }
+    nav a{
+      display:flex; align-items:center; gap:.4rem; color:#fff;
+      font-weight:600; letter-spacing:.2px; padding:.35rem .55rem;
+      border-radius:8px; transition:all .25s ease;
+    }
+    nav a:hover{ color:var(--brand-gold); background: rgba(255,255,255,.06); }
+
+    @media (max-width: 768px){
+      .menu-toggle{ display:block; }
+      nav{ position:relative; }
+      nav ul{
+        display:none; flex-direction:column; gap:.5rem;
+        background: linear-gradient(45deg, var(--brand-deep), var(--brand-mid));
+        position:absolute; right:0; top:110%;
+        padding:.75rem; min-width:230px; border-radius:12px; box-shadow:var(--shadow);
+      }
+      nav.open ul{ display:flex; }
+    }
+
+    /* ================== MAIN CONTAINERS ================== */
+    .container-narrow{ max-width:1000px; margin:2rem auto; padding:0 1rem; }
+    .section-title{
+      text-align:center; margin-bottom:1rem; font-size:clamp(1.4rem, 2vw + .6rem, 2rem);
+      color:#002244; font-weight:800; letter-spacing:.3px;
+    }
+    @media (prefers-color-scheme: dark){ .section-title{ color:#ffffff; } }
+    .section-sub{ text-align:center; color:var(--muted); margin-bottom:1.25rem; }
+
+    /* ================== CARDS / EFFECTS ================== */
+    .card-ui{
+      background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+      transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+      position:relative; overflow:hidden;
+    }
+    .card-ui:hover{ transform:translateY(-4px); box-shadow:0 16px 40px rgba(2,6,23,.15); }
+    .halo::after{
+      content:""; position:absolute; inset:-2px;
+      background: radial-gradient(150px 90px at 10% 0%, rgba(245,197,66,.14), transparent 70%),
+                  radial-gradient(180px 100px at 100% 0%, rgba(14,165,233,.14), transparent 70%);
+      pointer-events:none;
+    }
+
+    /* ================== DAILY VERSE SECTIONS ================== */
+    .verse-row{ display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:2rem; }
+    @media (min-width: 768px){ .verse-row{ grid-template-columns:repeat(2, 1fr); } }
+    .verse-card{
+      padding:1.2rem; text-align:center;
+      background: radial-gradient(120% 140% at 0% 0%, #0b264c 0%, #0a1b33 60%, #08152a 100%);
+      color:#fff; border: 1px solid rgba(255,255,255,.08);
+    }
+    .verse-badge{
+      position:absolute; left:14px; top:14px;
+      width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      background:rgba(255,255,255,.08); color:#fff;
+    }
+    .verse-card h3{ font-size:1.1rem; color:#fff; margin-bottom:.4rem; font-weight:800; }
+    .verse-text{ font-size:1rem; color:#fff; margin-bottom:.5rem; }
+    .cite-ref{ font-weight:800; color:#9fd1ff; letter-spacing:.25px; }
+    .verse-actions{ text-align:center; margin-top:.25rem; }
+
+    /* ================== BIBLE VERSION GRID (3/3) ================== */
+    .bible-grid{ display:grid; gap:1rem; margin-bottom:2rem; grid-template-columns:1fr; }
+    @media (min-width:576px){ .bible-grid{ grid-template-columns:repeat(2, 1fr); } }
+    @media (min-width:768px){ .bible-grid{ grid-template-columns:repeat(3, 1fr); } }
+    .bible-card{ padding:1.2rem; text-align:center; color:#0b2c5a; border:1px solid rgba(2,6,23,.05); }
+    .bible-card i{
+      font-size:1.9rem; margin-bottom:.6rem;
+      background: radial-gradient(40px 40px at 50% 50%, rgba(14,165,233,.25), transparent 60%);
+      padding:.8rem; border-radius:50%;
+    }
+    .bible-card span{ display:block; font-size:1rem; font-weight:800; margin-top:.2rem; }
+    .bible-card:hover{ background:#eef6ff; }
+    @media (prefers-color-scheme: dark){
+      .bible-card{ color:#dbeafe; border-color:rgba(255,255,255,.06); }
+      .bible-card:hover{ background:#122742; }
+    }
+
+    /* ================== CONTACT + CHURCH: TWO-UP BOXES ================== */
+    .two-up{ margin-top:1rem; }
+    .two-up-grid{
+      display:grid; gap:1rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 992px){
+      .two-up-grid{ grid-template-columns: 1fr 1fr; }
+    }
+    .two-up .card-box{
+      padding:1.25rem 1.5rem; text-align:center;
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .two-up .card-box p{ margin-left:auto; margin-right:auto; max-width:820px; }
+
+    /* ===== Questionnaire Icon + Button ===== */
+    .qa-actions{
+      display:flex; flex-direction:column; align-items:center;
+      gap:.6rem; margin-top:.25rem;
+    }
+    .qa-link-icon{
+      width:72px; height:72px; border-radius:50%;
+      display:inline-flex; align-items:center; justify-content:center;
+      color:#fff;
+      background: linear-gradient(135deg, #25F4EE, #1da3ff);
+      box-shadow: var(--shadow);
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .qa-link-icon:hover{ transform: translateY(-2px); filter: saturate(1.05); }
+    .qa-link-icon i{ font-size:28px; }
+    .qa-btn{ font-weight:800; }
+
+    /* ================== SOCIAL BUTTONS ================== */
+    .social-buttons{
+      display:flex; justify-content:center; gap:.8rem; flex-wrap:wrap; margin:1.25rem 0 0 0;
+    }
+    .social-buttons a{
+      display:flex; align-items:center; gap:.5rem; color:white; border-radius:10px;
+      padding:.65rem 1.15rem; font-weight:800; font-size:.98rem; letter-spacing:.25px;
+      box-shadow:var(--shadow); transition: transform .2s ease, opacity .2s ease, filter .2s ease;
+    }
+    .social-buttons a:hover{ transform:translateY(-3px); opacity:.95; filter:saturate(1.05); }
+    .tiktok-btn{ background:#000; } .youtube-btn{ background:#FF0000; }
+    .facebook-btn{ background:#1877F2; } .instagram-btn{ background:#E1306C; }
+    .threads-btn{ background:#000; }
+
+    /* ================== TIKTOK LIVE SECTION ================== */
+    .tiktok-live{ display:flex; justify-content:center; margin:2rem 0 0 0; }
+    .tiktok-live a{
+      display:inline-flex; align-items:center; gap:.6rem;
+      background: linear-gradient(135deg, #25F4EE, #1da3ff);
+      color:#fff; padding:.85rem 1.4rem; border-radius:12px;
+      font-size:1.05rem; font-weight:800; box-shadow:var(--shadow);
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .tiktok-live a i{ font-size:1.3rem; }
+    .tiktok-live a:hover{ transform:translateY(-3px); filter:saturate(1.05); }
+
+    /* ================== FOLLOW LINE & FOOTER ================== */
+    #follow-latest{ text-align:center; margin:0 0 .75rem 0; font-size:1.05rem; font-weight:800; color:#0b2c5a; }
+    @media (prefers-color-scheme: dark){ #follow-latest{ color:#dbeafe; } }
+    footer{
+      background:#0b1220; color:#e5e7eb; text-align:center;
+      padding:1rem; font-size:.95rem; margin-top:2rem;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    /* ================== DIVIDER & BACK TO TOP ================== */
+    .section-divider{ max-width:1100px; margin:2.25rem auto; padding:0 1rem; }
+    .section-divider hr{ border:0; height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent); }
+    .back-to-top{
+      position:fixed; right:1rem; bottom:1rem; z-index:999;
+      border:0; border-radius:50%; width:44px; height:44px; display:none;
+      align-items:center; justify-content:center;
+      background: linear-gradient(45deg, var(--brand-accent), #9ae6ff);
+      color:#000; box-shadow:var(--shadow); cursor:pointer;
+    }
+    .back-to-top.show{ display:flex; }
+    .back-to-top i{ font-size:1.1rem; }
+
+    /* Buttons */
+    .btn-outline-primary{ color:#ffffff; border-color:#9ae6ff; }
+    .btn-outline-primary:hover{ background:#22d3ee; color:#000; border-color:#22d3ee; }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; animation:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#landing">Skip to content</a>
+
+  <!-- HEADER NAVIGATION -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        <i class="fas fa-cross" aria-hidden="true"></i>
+        Jesus is the Way
+      </div>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+
+      <nav id="mainNav" aria-label="Primary">
+        <ul>
+          <li><a href="#landing"><i class="fas fa-bible" aria-hidden="true"></i> Home</a></li>
+          <li><a href="#bibles"><i class="fas fa-book-bible" aria-hidden="true"></i> Bibles</a></li>
+          <li><a href="#tiktok-live"><i class="fas fa-video" aria-hidden="true"></i> TikTok Live</a></li>
+          <li><a href="#contact"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a></li>
+          <li><a href="#church"><i class="fas fa-church" aria-hidden="true"></i> Church</a></li>
+          <li><a href="#social"><i class="fas fa-users" aria-hidden="true"></i> Social</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- DAILY VERSES (TEXT) -->
+  <main id="landing" class="container-narrow" tabindex="-1">
+    <h1 class="section-title">Daily Bible Verses</h1>
+    <p class="section-sub">A daily dose of your Bible verse in both Tagalog and English</p>
+    <div class="verse-row">
+      <div class="card-ui halo verse-card" id="verse-asd">
+        <div class="verse-badge"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
+        <h3>Tagalog ASD</h3>
+        <p class="verse-text">Loading…</p>
+        <p class="cite-ref"></p>
+      </div>
+      <div class="card-ui halo verse-card" id="verse-esv">
+        <div class="verse-badge"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
+        <h3>English – ESV</h3>
+        <p class="verse-text">Loading…</p>
+        <p class="cite-ref"></p>
+      </div>
+    </div>
+    <div class="verse-actions">
+      <button id="refreshVerses" class="btn btn-sm btn-outline-primary"><i class="fas fa-rotate"></i> Refresh verses</button>
+    </div>
+  </main>
+
+  <div class="section-divider"><hr></div>
+
+  <!-- BIBLE VERSION CARDS (3/3) -->
+  <section id="bibles" class="container-narrow">
+    <h2 class="section-title">Explore the Holy Bible Versions</h2>
+    <p class="section-sub">6 different Bibles.</p>
+    <div class="bible-grid">
+      <!-- Correct links -->
+      <a href="https://www.bible.com/bible/59/GEN.1.ESV" target="_blank" class="card-ui bible-card" aria-label="Open ESV Bible">
+        <i class="fas fa-book-bible" aria-hidden="true"></i><span>Holy Bible – ESV</span>
+      </a>
+      <a href="https://www.bible.com/tl/bible/1/GEN.1.KJV" target="_blank" class="card-ui bible-card" aria-label="Open KJV Bible">
+        <i class="fas fa-crown" aria-hidden="true"></i><span>Holy Bible – KJV</span>
+      </a>
+      <a href="https://www.bible.com/bible/116/GEN.1.NLT" target="_blank" class="card-ui bible-card" aria-label="Open NLT Bible">
+        <i class="fas fa-feather" aria-hidden="true"></i><span>Holy Bible – NLT</span>
+      </a>
+      <a href="https://www.bible.com/bible/111/GEN.1.NIV" target="_blank" class="card-ui bible-card" aria-label="Open NIV Bible">
+        <i class="fas fa-book-open" aria-hidden="true"></i><span>Holy Bible – NIV</span>
+      </a>
+      <a href="https://www.bible.com/tl/bible/1264/GEN.1.ASD" target="_blank" class="card-ui bible-card" aria-label="Open Tagalog ASD Bible">
+        <i class="fas fa-cross" aria-hidden="true"></i><span>Holy Bible – Tagalog ASD</span>
+      </a>
+      <a href="https://www.bible.com/bible/2187/GEN.1.ABCEB" target="_blank" class="card-ui bible-card" aria-label="Open Tagalog KJV Bible">
+        <i class="fas fa-cross" aria-hidden="true"></i><span>Holy Bible – Tagalog KJV</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="section-divider"><hr></div>
+
+  <!-- TIKTOK LIVE MATERIALS -->
+  <section id="tiktok-live" class="container-narrow">
+    <h2 class="section-title">TikTok Live Material Series</h2>
+    <p class="section-sub">Click below to view your PDF materials on Google Drive.</p>
+    <div class="tiktok-live">
+      <a href="https://drive.google.com/drive/folders/1u_M8Da598L7465Ro4sTPzdxuKb2t3HXV?usp=sharing" target="_blank" aria-label="Open Google Drive folder for TikTok materials">
+        <i class="fas fa-folder-open"></i> View PDF Materials
+      </a>
+    </div>
+  </section>
+
+  <div class="section-divider"><hr></div>
+
+  <!-- CONTACT + CHURCH: ONE ROW, TWO BOXES -->
+  <section id="connect" class="container-narrow two-up" aria-label="Contact and Church">
+    <div class="two-up-grid">
+      <!-- CONTACT card -->
+      <section id="contact" class="card-ui halo card-box">
+        <h2 class="section-title" style="margin-bottom:.5rem;">Any Concerns or Questions?</h2>
+
+        <!-- NEW: Icon + Button (both link to the questionnaire) -->
+        <div class="qa-actions">
+          <a
+            href="https://forms.gle/1PWmQyT5q8ZLvr2M6"
+            target="_blank"
+            rel="noopener"
+            class="qa-link-icon"
+            aria-label="Answer our Questionnaire"
+          >
+            <i class="fas fa-clipboard-list"></i>
+          </a>
+          <a
+            href="https://forms.gle/1PWmQyT5q8ZLvr2M6"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-outline-primary qa-btn"
+          >
+            Answer our Questionnaire
+          </a>
+        </div>
+      </section>
+
+      <!-- CHURCH card -->
+      <section id="church" class="card-ui halo card-box">
+        <h2 class="section-title" style="margin-bottom:.5rem;">Join a Church at CCF</h2>
+        <p class="section-sub" style="margin-bottom:.75rem;">
+          CCF is my home church. Feel free to join any local church that recognizes Jesus Christ as Lord and seeks to do His will.
+        </p>
+        <p class="section-sub" style="font-style:italic;">
+          “Not everyone who says to me, ‘Lord, Lord,’ will enter the kingdom of heaven, but the one who does the will of my Father who is in heaven.” — Matthew 7:21
+          <br>
+          “…not neglecting to meet together, as is the habit of some, but encouraging one another…” — Hebrews 10:25
+        </p>
+        <p><a href="https://www.ccf.org.ph" target="_blank" rel="noopener" class="btn btn-outline-primary">Visit CCF Website</a></p>
+      </section>
+    </div>
+  </section>
+
+  <div class="section-divider"><hr></div>
+
+  <!-- CCF MAIN ORTIGAS PASIG MAP -->
+  <section id="ccf-map" class="container-narrow">
+    <h2 class="section-title">Visit CCF Main (Ortigas, Pasig)</h2>
+    <p class="section-sub">Find directions below or open in Google Maps.</p>
+    <div class="card-ui halo" style="padding:0; overflow:hidden;">
+      <iframe
+        title="CCF Main Ortigas Pasig Location"
+        src="https://www.google.com/maps?q=CCF+Main+Ortigas+Pasig&output=embed"
+        width="100%" height="360" style="border:0; display:block;"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div style="text-align:center; margin-top:.75rem;">
+      <a class="btn btn-outline-primary" target="_blank" rel="noopener"
+         href="https://www.google.com/maps?q=CCF+Main+Ortigas+Pasig">
+        Open in Google Maps
+      </a>
+    </div>
+  </section>
+
+  <div class="section-divider"><hr></div>
+
+  <!-- FOLLOW LINE + SOCIAL (LAST) -->
+  <section id="social" class="container-narrow">
+    <div id="follow-latest">Follow WritewithKnight</div>
+    <h2 class="section-title">Connect with WritewithKnight on Social Media</h2>
+    <div class="social-buttons" aria-label="Social links">
+      <a href="https://www.tiktok.com/@writewithknight" target="_blank" class="tiktok-btn" rel="me noopener">
+        <i class="fab fa-tiktok" aria-hidden="true"></i> TikTok
+      </a>
+      <a href="https://www.youtube.com/@Writewithknight" target="_blank" class="youtube-btn" rel="me noopener">
+        <i class="fab fa-youtube" aria-hidden="true"></i> YouTube
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61578650543999" target="_blank" class="facebook-btn" rel="me noopener">
+        <i class="fab fa-facebook" aria-hidden="true"></i> Facebook
+      </a>
+      <a href="https://www.instagram.com/writewdknight" target="_blank" class="instagram-btn" rel="me noopener">
+        <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
+      </a>
+      <a href="https://www.threads.com/@writewdknight" target="_blank" class="threads-btn" rel="me noopener">
+        <i class="fab fa-threads" aria-hidden="true"></i> Threads
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    All rights reserved | Jesus Christ Loves You Forever | John 14:6
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    menuBtn.addEventListener('click', () => mainNav.classList.toggle('open'));
+
+    // Smooth scroll with header offset
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          e.preventDefault();
+          const el = document.querySelector(id);
+          if (!el) return;
+          const headerH = document.querySelector('header').offsetHeight;
+          const top = el.getBoundingClientRect().top + window.pageYOffset - (headerH + 8);
+          window.scrollTo({ top, behavior: 'smooth' });
+          if (mainNav.classList.contains('open')) mainNav.classList.remove('open');
+        }
+      });
+    });
+
+    // Back to top visibility
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      (window.scrollY > 600) ? backTop.classList.add('show') : backTop.classList.remove('show');
+    });
+    backTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+    // Verse fetcher
+    async function fetchVerse(apiUrl, selectorId) {
+      const el = document.getElementById(selectorId);
+      try {
+        const resp = await fetch(apiUrl);
+        const data = await resp.json();
+        el.querySelector('.verse-text').textContent = data.verse.details.text;
+        el.querySelector('.cite-ref').textContent = data.verse.details.reference;
+      } catch (err) {
+        el.querySelector('.verse-text').textContent = 'Could not load verse.';
+        el.querySelector('.cite-ref').textContent = '';
+      }
+    }
+
+    function loadVerses(){
+      fetchVerse("https://beta.ourmanna.com/api/v1/get/?format=json", 'verse-esv');
+      const asd = document.getElementById('verse-asd');
+      asd.querySelector('.verse-text').textContent = 'Coming Soon (Tagalog ASD)';
+      asd.querySelector('.cite-ref').textContent = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadVerses();
+      const btn = document.getElementById('refreshVerses');
+      if (btn) btn.addEventListener('click', loadVerses);
+    });
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
