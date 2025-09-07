@@ -248,7 +248,7 @@
     .devotion-card .example{ font-style:italic; color:var(--muted); }
     .devotion-links{ display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; justify-content:center; }
 
-    /* ================== SOCIAL BUTTONS ================== */
+    /* ================== SOCIAL BUTTONS (unused now, kept) ================== */
     .social-buttons{
       display:flex; justify-content:center; gap:.8rem; flex-wrap:wrap; margin:1.25rem 0 0 0;
     }
@@ -322,10 +322,12 @@
         <ul>
           <li><a href="#landing"><i class="fas fa-bible" aria-hidden="true"></i> Home</a></li>
           <li><a href="#bibles"><i class="fas fa-book-bible" aria-hidden="true"></i> Bibles</a></li>
-          <li><a href="#tiktok-live"><i class="fas fa-video" aria-hidden="true"></i> Live Series Materials</a></li>
+          <li><a href="#devotionals"><i class="fas fa-book-open" aria-hidden="true"></i> Devotionals</a></li>
+          <li><a href="#tiktok-live"><i class="fas fa-video" aria-hidden="true"></i> Materials</a></li>
           <li><a href="#contact"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a></li>
           <li><a href="#church"><i class="fas fa-church" aria-hidden="true"></i> Church</a></li>
-          <li><a href="#social"><i class="fas fa-users" aria-hidden="true"></i> Social</a></li>
+          <li><a href="#realflection"><i class="fas fa-comments" aria-hidden="true"></i> Reflections</a></li>
+          <!-- Removed Social link per request -->
         </ul>
       </nav>
     </div>
@@ -419,8 +421,6 @@
 
   <div class="section-divider"><hr></div>
 
-
-
   <!-- NEW: DEVOTIONAL METHODS (3 boxes, one row on desktop) -->
   <section id="devotionals" class="container-narrow">
     <h2 class="section-title">How to Do Devotionals</h2>
@@ -478,7 +478,8 @@
   </section>
 
   <div class="section-divider"><hr></div>
-    <!-- CONTACT + CHURCH: ONE ROW, TWO BOXES -->
+
+  <!-- CONTACT + CHURCH: ONE ROW, TWO BOXES -->
   <section id="connect" class="container-narrow two-up" aria-label="Contact and Church">
     <div class="two-up-grid">
       <!-- CONTACT card -->
@@ -525,28 +526,35 @@
 
   <div class="section-divider"><hr></div>
 
-  <!-- FOLLOW LINE + SOCIAL (LAST) -->
-  <section id="social" class="container-narrow">
-    <div id="follow-latest">Follow WritewithKnight</div>
-    <h2 class="section-title">Connect with WritewithKnight on Social Media</h2>
-    <div class="social-buttons" aria-label="Social links">
-      <a href="https://www.tiktok.com/@writewithknight" target="_blank" class="tiktok-btn" rel="me noopener">
-        <i class="fab fa-tiktok" aria-hidden="true"></i> TikTok
-      </a>
-      <a href="https://www.youtube.com/@Writewithknight" target="_blank" class="youtube-btn" rel="me noopener">
-        <i class="fab fa-youtube" aria-hidden="true"></i> YouTube
-      </a>
-      <a href="https://www.facebook.com/profile.php?id=61578650543999" target="_blank" class="facebook-btn" rel="me noopener">
-        <i class="fab fa-facebook" aria-hidden="true"></i> Facebook
-      </a>
-      <a href="https://www.instagram.com/writewdknight" target="_blank" class="instagram-btn" rel="me noopener">
-        <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
-      </a>
-      <a href="https://www.threads.com/@writewdknight" target="_blank" class="threads-btn" rel="me noopener">
-        <i class="fab fa-threads" aria-hidden="true"></i> Threads
-      </a>
-    </div>
-  </section>
+ <!-- ✝ REAL-FLECTION BOARD -->
+<section id="realflection" style="padding:2rem 1rem; max-width:980px; margin:0 auto;">
+  <h2 style="margin-bottom:0.5rem;">✝ Real-flection for Jesus</h2>
+  <p style="margin-bottom:1rem;">
+    Share your reflections, prayers, testimonies, or questions for Jesus.
+    You may use an alias or “Anonymous.” Be loving, respectful, and Christ-centered.
+    Jesus loves you! 💖
+  </p>
+
+  <!-- Secure HTTPS embed -->
+  <div style="border:1px solid rgba(255,255,255,.12); border-radius:12px; overflow:hidden; background:#fff;">
+    <iframe
+      src="https://pub21.bravenet.com/forum/1778019806/"
+      style="width:100%; height:1200px; border:0;"
+      loading="lazy"
+      referrerpolicy="no-referrer"
+      title="Real-flection Forum">
+    </iframe>
+  </div>
+
+  <!-- Fallback button -->
+  <div style="text-align:center; margin-top:.75rem;">
+    <a class="btn btn-outline-primary" href="https://pub21.bravenet.com/forum/1778019806/" target="_blank" rel="noopener">
+      Open the Real-flection board in a new tab
+    </a>
+  </div>
+</section>
+
+  <div class="section-divider"><hr></div>
 
   <!-- FOOTER -->
   <footer>
@@ -620,6 +628,3 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-
