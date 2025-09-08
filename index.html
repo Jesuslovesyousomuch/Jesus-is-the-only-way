@@ -53,6 +53,7 @@
         --brand-mid:#052b52;
       }
     }
+    html[data-theme="dark"] { color-scheme: dark; }
 
     /* ================== RESET & BASE ================== */
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -86,21 +87,29 @@
       max-width:1100px; margin:0 auto;
       display:flex; align-items:center; justify-content:space-between;
       padding:.70rem 1rem;
+      gap:.35rem;
     }
     .logo{
       display:flex; align-items:center; gap:.6rem;
       font-size:1.35rem; font-weight:800; letter-spacing:.3px;
     }
     .logo i{ color:var(--brand-gold); }
-    .menu-toggle{ display:none; border:none; background:transparent; color:#fff; font-size:1.35rem; }
+    .menu-toggle{ display:none; border:none; background:transparent; color:#fff; font-size:1.1rem; padding:.35rem .55rem; border-radius:8px; }
+    .menu-toggle:hover{ background: rgba(255,255,255,.08); }
     nav ul{ list-style:none; display:flex; gap:1rem; }
     nav a{
       display:flex; align-items:center; gap:.4rem; color:#fff; font-weight:600; letter-spacing:.2px;
       padding:.35rem .55rem; border-radius:8px; transition:all .25s ease;
     }
     nav a:hover{ color:var(--brand-gold); background: rgba(255,255,255,.06); }
+    nav a[aria-current="page"]{
+      color:var(--brand-gold);
+      background: rgba(255,255,255,.10);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
     @media (max-width: 768px){
-      .menu-toggle{ display:block; }
+      .menu-toggle{ display:inline-flex; }
       nav{ position:relative; }
       nav ul{
         display:none; flex-direction:column; gap:.5rem;
@@ -172,7 +181,7 @@
     .verse-card h3{ font-size:1.1rem; color:#fff; margin-bottom:.4rem; font-weight:800; }
     .verse-text{ font-size:1rem; color:#fff; margin-bottom:.5rem; }
     .cite-ref{ font-weight:800; color:#9fd1ff; letter-spacing:.25px; }
-    .verse-actions{ text-align:center; margin-top:.25rem; }
+    .verse-actions{ text-align:center; margin-top:.5rem; display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; }
 
     /* ================== BIBLE VERSION GRID (3/3) ================== */
     .bible-grid{ display:grid; gap:1rem; margin-bottom:2rem; grid-template-columns:1fr; }
@@ -246,9 +255,23 @@
       background: linear-gradient(135deg, #25F4EE, #1da3ff); color:#fff; padding:.85rem 1.4rem;
       border-radius:12px; font-size:1.05rem; font-weight:800; box-shadow:var(--shadow);
       transition: transform .2s ease, filter .2s ease;
+      text-align:center;
     }
     .tiktok-live a i{ font-size:1.3rem; }
     .tiktok-live a:hover{ transform:translateY(-3px); filter:saturate(1.05); }
+
+    /* Centering helper for TikTok CTA (robust) */
+    #tiktok-live .cta{ display:flex; justify-content:center; align-items:center; margin-top:1rem; }
+    .btn-drive{
+      display:inline-flex; align-items:center; gap:.6rem;
+      background: linear-gradient(135deg, #25F4EE, #1da3ff);
+      color:#fff; padding:.9rem 1.4rem; border-radius:12px;
+      font-size:1.05rem; font-weight:800; box-shadow: var(--shadow);
+      transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+      text-align:center;
+    }
+    .btn-drive:hover{ transform: translateY(-3px); filter: saturate(1.05); box-shadow:0 12px 30px rgba(0,0,0,.18); }
+    .btn-drive i{ font-size:1.15rem; }
 
     /* ================== FOLLOW LINE & FOOTER ================== */
     #follow-latest{ text-align:center; margin:0 0 .75rem 0; font-size:1.05rem; font-weight:800; color:#0b2c5a; }
@@ -277,11 +300,23 @@
     @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; } }
 
     h5 {
-      font-family: 'Cinzel', serif;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       font-size: 2.2rem; color: #ffffff; text-align: center;
       text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.7), 0px 0px 15px rgba(0, 153, 255, 0.4);
       letter-spacing: 1px;
     }
+
+    /* ======= New Tools styles (timer, streak) ======= */
+    .tools-grid{ display:grid; gap:1rem; grid-template-columns:1fr; }
+    @media (min-width: 992px){ .tools-grid{ grid-template-columns: repeat(3, 1fr); } }
+    .tool-card{ padding:1rem 1.2rem; }
+    .timer-display{ font: 800 2rem/1.1 'Inter',sans-serif; letter-spacing:1px; }
+    .timer-controls{ display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; margin-top:.5rem; }
+    .timer-pills{ display:flex; gap:.4rem; flex-wrap:wrap; justify-content:center; }
+    .timer-pills button{ border:1px solid rgba(255,255,255,.25); background:transparent; color:#fff; padding:.25rem .5rem; border-radius:999px; font-weight:700; }
+    .timer-pills button.active{ background:#22d3ee; color:#000; border-color:#22d3ee; }
+    .streak-stats{ display:flex; gap:1rem; justify-content:center; font-weight:800; }
+    .streak-stats .num{ font-size:1.6rem; }
   </style>
 </head>
 <body>
@@ -295,12 +330,25 @@
         Jesus Loves You
       </div>
 
+      <!-- New quick controls (do NOT affect your existing buttons) -->
+      <div class="d-none d-md-inline-flex" style="gap:.35rem;">
+        <button id="fontMinus" class="menu-toggle" aria-label="Decrease font size" title="Font size -">A−</button>
+        <button id="fontPlus" class="menu-toggle" aria-label="Increase font size" title="Font size +">A+</button>
+        <button id="themeToggle" class="menu-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <button class="menu-toggle" id="installBtn" aria-label="Install app" title="Install app" style="display:none;">
+          <i class="fa-solid fa-download"></i>
+        </button>
+      </div>
+
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
       <nav id="mainNav" aria-label="Primary">
         <ul>
           <li><a href="#landing"><i class="fas fa-bible" aria-hidden="true"></i> Home</a></li>
           <li><a href="#bibles"><i class="fas fa-book-bible" aria-hidden="true"></i> Bibles</a></li>
           <li><a href="#devotionals"><i class="fas fa-book-open" aria-hidden="true"></i> Devotionals</a></li>
+          <li><a href="#tools"><i class="fas fa-tools" aria-hidden="true"></i> Tools</a></li>
           <li><a href="#tiktok-live"><i class="fas fa-video" aria-hidden="true"></i> Materials</a></li>
           <li><a href="#contact"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a></li>
           <li><a href="#church"><i class="fas fa-church" aria-hidden="true"></i> Church</a></li>
@@ -342,8 +390,16 @@
       <h3>English – ESV</h3>
       <p class="verse-text">Loading…</p>
       <p class="cite-ref"></p>
+
+      <!-- NEW: Verse actions -->
+      <div class="verse-actions" aria-label="Verse actions">
+        <button class="btn btn-outline-primary btn-sm" id="btnCopyVerse"><i class="fa-solid fa-copy"></i> Copy</button>
+        <button class="btn btn-outline-primary btn-sm" id="btnShareVerse"><i class="fa-solid fa-share"></i> Share</button>
+        <button class="btn btn-outline-primary btn-sm" id="btnSpeakVerse"><i class="fa-solid fa-volume-high"></i> Read Aloud</button>
+        <button class="btn btn-outline-primary btn-sm" id="btnImageVerse"><i class="fa-solid fa-image"></i> Save Image</button>
+      </div>
+      <canvas id="verseCanvas" width="1200" height="630" style="display:none;"></canvas>
     </div>
-  </div>
   </main>
 
   <div class="section-divider"><hr></div>
@@ -383,9 +439,14 @@
     <h2 class="section-title">TikTok Live Material Series</h2>
     <p class="section-sub">Click below to view your PDF materials on Google Drive.</p>
 
-    <div class="tiktok-live">
-      <a href="https://drive.google.com/drive/folders/1u_M8Da598L7465Ro4sTPzdxuKb2t3HXV?usp=sharing" target="_blank" aria-label="Open Google Drive folder for TikTok materials">
-        <i class="fas fa-folder-open"></i> View PDF Materials
+    <!-- Robustly centered CTA (keeps your visuals) -->
+    <div class="cta">
+      <a href="https://drive.google.com/drive/folders/1u_M8Da598L7465Ro4sTPzdxuKb2t3HXV?usp=sharing"
+         target="_blank" rel="noopener"
+         aria-label="Open Google Drive folder for TikTok materials"
+         class="btn-drive">
+        <i class="fa-solid fa-folder-open"></i>
+        <span>View PDF Materials</span>
       </a>
     </div>
   </section>
@@ -468,6 +529,60 @@
 
   <div class="section-divider"><hr></div>
 
+  <!-- NEW: TOOLS (Timer, Streak, Calendar) -->
+  <section id="tools" class="container-narrow">
+    <h2 class="section-title">Tools to Help Your Walk</h2>
+    <p class="section-sub">Timers, streaks, and reminders to build a faithful habit.</p>
+
+    <div class="tools-grid">
+      <!-- Devotional Timer -->
+      <div class="card-ui halo tool-card" id="timerCard" style="color:#fff; background: radial-gradient(120% 140% at 0% 0%, #0b264c 0%, #0a1b33 60%, #08152a 100%); border:1px solid rgba(255,255,255,.08);">
+        <h3 class="mb-1" style="color:#fff;"><i class="fa-solid fa-hourglass-half"></i> Devotional Timer</h3>
+        <div class="timer-pills" aria-label="Quick durations">
+          <button data-min="5">5m</button>
+          <button data-min="10">10m</button>
+          <button data-min="15" class="active">15m</button>
+          <button data-min="20">20m</button>
+          <button data-min="30">30m</button>
+        </div>
+        <div class="timer-display my-2" id="timerDisplay">15:00</div>
+        <div class="timer-controls">
+          <button class="btn btn-outline-primary btn-sm" id="timerStart"><i class="fa-solid fa-play"></i> Start</button>
+          <button class="btn btn-outline-primary btn-sm" id="timerPause"><i class="fa-solid fa-pause"></i> Pause</button>
+          <button class="btn btn-outline-primary btn-sm" id="timerReset"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+        </div>
+        <small class="d-block mt-2" style="opacity:.85;">Tip: Use this for focused Scripture reading and prayer.</small>
+      </div>
+
+      <!-- Prayer Streak -->
+      <div class="card-ui halo tool-card" id="streakCard">
+        <h3 class="mb-1"><i class="fa-solid fa-fire"></i> Prayer Streak</h3>
+        <p class="mb-2">Mark your daily time with Jesus and keep the fire going.</p>
+        <div class="streak-stats">
+          <div>Current<br><span class="num" id="streakCurrent">0</span> days</div>
+          <div>Longest<br><span class="num" id="streakLongest">0</span> days</div>
+        </div>
+        <div class="text-center mt-2">
+          <button class="btn btn-outline-primary btn-sm" id="markToday"><i class="fa-regular fa-square-check"></i> I Prayed Today</button>
+          <button class="btn btn-outline-primary btn-sm" id="undoToday"><i class="fa-regular fa-square"></i> Undo Today</button>
+        </div>
+        <small class="d-block mt-2 text-center" style="color:var(--muted);">Saved privately on your device.</small>
+      </div>
+
+      <!-- Calendar Reminder -->
+      <div class="card-ui halo tool-card" id="calendarCard">
+        <h3 class="mb-1"><i class="fa-regular fa-calendar-check"></i> Daily Reminder</h3>
+        <p class="mb-2">Add a 15-minute “Daily Devotional” reminder to your calendar.</p>
+        <div class="text-center">
+          <button class="btn btn-outline-primary btn-sm" id="downloadICS"><i class="fa-solid fa-file-arrow-down"></i> Add to Calendar (.ics)</button>
+        </div>
+        <small class="d-block mt-2 text-center" style="color:var(--muted);">Opens in your calendar app (Google/Apple/Outlook support .ics).</small>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><hr></div>
+
   <!-- CONTACT + CHURCH: ONE ROW, TWO BOXES -->
   <section id="connect" class="container-narrow two-up" aria-label="Contact and Church">
     <div class="two-up-grid">
@@ -532,6 +647,25 @@
 
   <!-- SCRIPTS -->
   <script>
+    /* ===== Theme + Font Size (non-destructive) ===== */
+    (function initThemeAndFont(){
+      const root = document.documentElement;
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) root.setAttribute('data-theme', savedTheme);
+      document.getElementById('themeToggle')?.addEventListener('click', ()=>{
+        const isDark = root.getAttribute('data-theme') === 'dark';
+        const next = isDark ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+
+      let fontScale = parseInt(localStorage.getItem('fontScale') || '100', 10);
+      function applyScale(){ document.documentElement.style.fontSize = (fontScale/100*16)+'px'; }
+      applyScale();
+      document.getElementById('fontMinus')?.addEventListener('click', ()=>{ fontScale=Math.max(85,fontScale-5); localStorage.setItem('fontScale',fontScale); applyScale(); });
+      document.getElementById('fontPlus')?.addEventListener('click', ()=>{ fontScale=Math.min(130,fontScale+5); localStorage.setItem('fontScale',fontScale); applyScale(); });
+    })();
+
     // Mobile menu toggle
     const menuBtn = document.getElementById('menuToggle');
     const mainNav = document.getElementById('mainNav');
@@ -553,6 +687,24 @@
       });
     });
 
+    // Highlight nav link for visible section
+    (function setActiveOnScroll(){
+      const links = Array.from(document.querySelectorAll('#mainNav a[href^="#"]'));
+      const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          const id='#'+entry.target.id;
+          const link=links.find(a=>a.getAttribute('href')===id);
+          if (!link) return;
+          if (entry.isIntersecting) {
+            links.forEach(a=>a.removeAttribute('aria-current'));
+            link.setAttribute('aria-current','page');
+          }
+        });
+      }, { rootMargin:'-40% 0px -55% 0px', threshold:0 });
+      sections.forEach(sec=>io.observe(sec));
+    })();
+
     // Back to top visibility
     const backTop = document.getElementById('backTop');
     window.addEventListener('scroll', () => {
@@ -560,37 +712,161 @@
     });
     backTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
 
-    // Verse fetcher
+    // Verse fetcher (ESV only per your direction)
     async function fetchVerse(apiUrl, selectorId) {
       const el = document.getElementById(selectorId);
       try {
-        const resp = await fetch(apiUrl);
+        const resp = await fetch(apiUrl, { cache:'no-store' });
         const data = await resp.json();
-        el.querySelector('.verse-text').textContent = data.verse.details.text;
-        el.querySelector('.cite-ref').textContent = data.verse.details.reference;
+        el.querySelector('.verse-text').textContent = data?.verse?.details?.text || '—';
+        el.querySelector('.cite-ref').textContent  = data?.verse?.details?.reference || '';
       } catch (err) {
         el.querySelector('.verse-text').textContent = 'Could not load verse.';
         el.querySelector('.cite-ref').textContent = '';
       }
     }
 
-    function loadVerses(){
+    document.addEventListener('DOMContentLoaded', () => {
       fetchVerse("https://beta.ourmanna.com/api/v1/get/?format=json", 'verse-esv');
-      const asd = document.getElementById('verse-asd');
-      asd.querySelector('.verse-text').textContent = 'Coming Soon (Tagalog ASD)';
-      asd.querySelector('.cite-ref').textContent = '';
+    });
+
+    // ===== Verse actions =====
+    function currentVerse(){
+      const el=document.getElementById('verse-esv');
+      return {
+        text: el?.querySelector('.verse-text')?.textContent?.trim() || '',
+        ref:  el?.querySelector('.cite-ref')?.textContent?.trim() || ''
+      };
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      loadVerses();
-      const btn = document.getElementById('refreshVerses');
-      if (btn) btn.addEventListener('click', loadVerses);
+    document.getElementById('btnCopyVerse')?.addEventListener('click', async ()=>{
+      const v=currentVerse(); const payload=`${v.text} — ${v.ref}`;
+      try{ await navigator.clipboard.writeText(payload); alert('Verse copied to clipboard.'); }
+      catch{
+        const ta=document.createElement('textarea'); ta.value=payload; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta); alert('Verse copied to clipboard.');
+      }
     });
+
+    document.getElementById('btnShareVerse')?.addEventListener('click', async ()=>{
+      const v=currentVerse(); const text=`${v.text} — ${v.ref}`;
+      if (navigator.share) { try { await navigator.share({ title: v.ref || 'Daily Verse', text }); } catch {} }
+      else {
+        const url = location.href;
+        const tw = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+        window.open(tw,'_blank','noopener');
+      }
+    });
+
+    document.getElementById('btnSpeakVerse')?.addEventListener('click', ()=>{
+      const v=currentVerse(); const u=new SpeechSynthesisUtterance(`${v.text}. ${v.ref}`); u.lang='en-US'; speechSynthesis.cancel(); speechSynthesis.speak(u);
+    });
+
+    // Save as image (1200x630)
+    function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight){
+      const words=text.split(' '); let line=''; let yy=y;
+      for (let n=0;n<words.length;n++){
+        const test=line+words[n]+' '; const w=ctx.measureText(test).width;
+        if (w>maxWidth && n>0){ ctx.fillText(line.trim(),x,yy); line=words[n]+' '; yy+=lineHeight; }
+        else line=test;
+      }
+      if (line) ctx.fillText(line.trim(),x,yy);
+      return yy;
+    }
+    document.getElementById('btnImageVerse')?.addEventListener('click', ()=>{
+      const { text, ref }=currentVerse();
+      const canvas=document.getElementById('verseCanvas'); const ctx=canvas.getContext('2d');
+      const grd=ctx.createLinearGradient(0,0,1200,630); grd.addColorStop(0,'#0b264c'); grd.addColorStop(1,'#08152a');
+      ctx.fillStyle=grd; ctx.fillRect(0,0,1200,630);
+      const glow=ctx.createRadialGradient(200,150,50,200,150,400); glow.addColorStop(0,'rgba(245,197,66,0.22)'); glow.addColorStop(1,'rgba(245,197,66,0)');
+      ctx.fillStyle=glow; ctx.fillRect(0,0,1200,630);
+      ctx.fillStyle='#9fd1ff'; ctx.font='bold 30px Inter, Arial, sans-serif'; ctx.fillText('Daily Bible Verse',60,80);
+      ctx.fillStyle='#fff'; ctx.font='bold 42px Inter, Arial, sans-serif'; const endY=wrapCanvasText(ctx,text,60,180,1080,56);
+      ctx.fillStyle='#9fd1ff'; ctx.font='bold 32px Inter, Arial, sans-serif'; ctx.fillText(ref,60,endY+56);
+      ctx.fillStyle='rgba(255,255,255,0.85)'; ctx.font='bold 24px Inter, Arial, sans-serif'; ctx.fillText(location.hostname,60,600);
+      const a=document.createElement('a'); a.download=(ref||'verse').replace(/\s+/g,'_')+'.png'; a.href=canvas.toDataURL('image/png'); a.click();
+    });
+
+    // ===== Devotional Timer =====
+    (function initTimer(){
+      const display=document.getElementById('timerDisplay');
+      const startBtn=document.getElementById('timerStart');
+      const pauseBtn=document.getElementById('timerPause');
+      const resetBtn=document.getElementById('timerReset');
+      const pills=Array.from(document.querySelectorAll('.timer-pills button'));
+
+      let secs=15*60; let iv=null;
+      const fmt=n=>String(n).padStart(2,'0');
+      const render=()=>{ const m=Math.floor(secs/60), s=secs%60; display.textContent=`${fmt(m)}:${fmt(s)}`; };
+      const setMin=min=>{ secs=min*60; render(); pills.forEach(p=>p.classList.toggle('active', Number(p.dataset.min)===min)); };
+      function tick(){ if (secs>0){ secs--; render(); if (secs===0){ chime(); } } else { clearInterval(iv); iv=null; } }
+      function chime(){ try{ const ctx=new (window.AudioContext||window.webkitAudioContext)(); const o=ctx.createOscillator(); const g=ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.type='sine'; o.frequency.value=660; g.gain.setValueAtTime(0.001,ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.2,ctx.currentTime+0.01); o.start(); setTimeout(()=>{o.stop(); ctx.close();},500);}catch{} }
+      pills.forEach(p=>p.addEventListener('click',()=>setMin(Number(p.dataset.min))));
+      startBtn.addEventListener('click',()=>{ if (!iv) iv=setInterval(tick,1000); });
+      pauseBtn.addEventListener('click',()=>{ if (iv){ clearInterval(iv); iv=null; }});
+      resetBtn.addEventListener('click',()=>{ const active=pills.find(p=>p.classList.contains('active')); setMin(Number(active?.dataset.min||15)); });
+      render();
+    })();
+
+    // ===== Prayer Streak =====
+    (function initStreak(){
+      const key='jly_prayer_dates';
+      const currentEl=document.getElementById('streakCurrent');
+      const longestEl=document.getElementById('streakLongest');
+      const markBtn=document.getElementById('markToday');
+      const undoBtn=document.getElementById('undoToday');
+      const load=()=>{ try{return JSON.parse(localStorage.getItem(key)||'[]');}catch{return[];} };
+      const save=a=>localStorage.setItem(key, JSON.stringify(Array.from(new Set(a)).sort()));
+      const iso=d=>d.toISOString().slice(0,10);
+      const today=()=>{ const d=new Date(); d.setHours(0,0,0,0); return d; };
+      const yday=d=>{ const x=new Date(d); x.setDate(x.getDate()-1); return x; };
+      function calc(dates){
+        const set=new Set(dates); let cur=0, longest=Number(localStorage.getItem('jly_longest')||'0'); let t=today();
+        while(set.has(iso(t))){ cur++; t=yday(t); }
+        if (cur>longest){ longest=cur; localStorage.setItem('jly_longest', String(longest)); }
+        return {cur,longest};
+      }
+      function refresh(){ const d=load(); const {cur,longest}=calc(d); currentEl.textContent=cur; longestEl.textContent=longest; }
+      markBtn.addEventListener('click',()=>{ const d=load(); const t=iso(today()); if(!d.includes(t)){ d.push(t); save(d);} refresh(); });
+      undoBtn.addEventListener('click',()=>{ const d=load(); const t=iso(today()); const i=d.indexOf(t); if(i>-1){ d.splice(i,1); save(d);} refresh(); });
+      refresh();
+    })();
+
+    // ===== Calendar (.ics) =====
+    document.getElementById('downloadICS')?.addEventListener('click', ()=>{
+      const now=new Date(); const pad=n=>String(n).padStart(2,'0');
+      const dtstamp=`${now.getUTCFullYear()}${pad(now.getUTCMonth()+1)}${pad(now.getUTCDate())}T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}${pad(now.getUTCSeconds())}Z`;
+      const start=new Date(); start.setDate(start.getDate()+1); start.setHours(7,0,0,0);
+      const DTSTART=`${start.getFullYear()}${pad(start.getMonth()+1)}${pad(start.getDate())}T${pad(start.getHours())}${pad(start.getMinutes())}00`;
+      const ics=`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//JesusLovesYou//DailyDevotional//EN
+BEGIN:VEVENT
+UID:${Date.now()}@jly
+DTSTAMP:${dtstamp}
+SUMMARY:Daily Devotional
+DESCRIPTION:Open your Bible, pray, and meet with Jesus.
+DTSTART:${DTSTART}
+DURATION:PT15M
+RRULE:FREQ=DAILY
+END:VEVENT
+END:VCALENDAR`;
+      const blob=new Blob([ics],{type:'text/calendar'}); const url=URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download='daily-devotional.ics'; a.click(); URL.revokeObjectURL(url);
+    });
+
+    // PWA install prompt
+    let deferredPrompt=null; const installBtn=document.getElementById('installBtn');
+    window.addEventListener('beforeinstallprompt',(e)=>{ e.preventDefault(); deferredPrompt=e; installBtn.style.display='inline-flex'; });
+    installBtn?.addEventListener('click', async ()=>{ if(!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; installBtn.style.display='none'; });
+
+    // Register service worker (optional)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(()=>{});
+    }
   </script>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
