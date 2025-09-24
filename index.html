@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jesus Loves You</title>
 
-  <!-- Favicon (inline SVG) -->
+  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230b2c5a'/><path d='M30 10h4v16h16v4H34v24h-4V30H14v-4h16z' fill='%23fff'/></svg>">
 
+  <!-- Meta -->
   <meta name="description" content="Pointing people to Jesus with daily Bible verses and quick links to six Bible versions." />
   <meta name="theme-color" content="#002244" />
 
@@ -17,10 +18,10 @@
   <meta property="og:type" content="website" />
   <meta property="twitter:card" content="summary_large_image" />
 
-  <!-- Canonical (SEO) -->
+  <!-- Canonical -->
   <link rel="canonical" href="." />
 
-  <!-- Performance preconnects -->
+  <!-- Preconnects -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,15 +29,14 @@
 
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- Site CSS -->
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- JSON-LD (SEO) -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -50,6 +50,9 @@
     }
   }
   </script>
+
+  <!-- App Styles -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <a class="skip-link" href="#landing">Skip to content</a>
@@ -70,6 +73,7 @@
         <button id="fontMinus" class="menu-toggle" aria-label="Decrease font size" title="Font size -">A−</button>
         <button id="fontPlus" class="menu-toggle" aria-label="Increase font size" title="Font size +">A+</button>
         <button id="themeToggle" class="menu-toggle" aria-label="Toggle dark mode" title="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+        <button id="settingsBtn" class="menu-toggle" aria-label="Open settings" title="Settings"><i class="fa-solid fa-gear"></i></button>
         <button class="menu-toggle" id="installBtn" aria-label="Install app" title="Install app" style="display:none;"><i class="fa-solid fa-download"></i></button>
       </div>
 
@@ -77,7 +81,7 @@
       <nav id="mainNav" aria-label="Primary">
         <ul>
           <li><a href="#landing"><i class="fas fa-bible" aria-hidden="true"></i><span class="label">Home</span></a></li>
-          <li><a href="#start-here"><i class="fa-solid fa-star"></i><span class="label">Start Here</span></a></li>
+          <li><a href="#start-here"><i class="fas fa-star" aria-hidden="true"></i><span class="label">Start Here</span></a></li>
           <li><a href="#bibles"><i class="fas fa-book-bible" aria-hidden="true"></i><span class="label">Bibles</span></a></li>
           <li><a href="#devotionals"><i class="fas fa-book-open" aria-hidden="true"></i><span class="label">Devotionals</span></a></li>
           <li><a href="#tools"><i class="fas fa-tools" aria-hidden="true"></i><span class="label">Tools</span></a></li>
@@ -94,122 +98,108 @@
   <section class="container-narrow">
     <div class="card-ui halo hero-callout">
       <h5>“You are here for a reason.”</h5>
-      <p>Deep in your heart, you long for something this world can never give. That longing is the call of Jesus — His love, His truth, His home. Today is the time to say yes to Him.</p>
-      <p class="mb-0"><span class="verse-ref">“Come to me, all you who are weary and burdened, and I will give you rest.”</span> — Matthew 11:28</p>
+      <p>Deep in your heart, you long for something this world can never give. That longing is the call of Jesus - His love, His truth, His home. Today is the time to say yes to Him.</p>
+      <p class="mb-0"><span class="verse-ref">“Come to me, all you who are weary and burdened, and I will give you rest.”</span> - Matthew 11:28</p>
     </div>
 
     <!-- SPOTLIGHT VERSES -->
     <div class="spotlight-grid" style="margin-top:1rem;">
       <div class="spot-card card-ui">
         <h3><i class="fa-solid fa-heart"></i> For God so loved the world</h3>
-        <p class="verse">For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life. — John 3:16</p>
+        <p class="verse">For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life. - John 3:16</p>
       </div>
       <div class="spot-card card-ui">
         <h3><i class="fa-solid fa-dove"></i> Jesus is the way</h3>
-        <p class="verse">Jesus answered, “I am the way and the truth and the life. No one comes to the Father except through me.” — John 14:6</p>
+        <p class="verse">Jesus answered, “I am the way and the truth and the life. No one comes to the Father except through me.” - John 14:6</p>
       </div>
     </div>
   </section>
 
-  <!-- START HERE (New Christian Onboarding) -->
+  <!-- START HERE (NEW) -->
   <section id="start-here" class="container-narrow">
-    <h2 class="section-title">Start Here — New in Christ</h2>
-    <p class="section-sub">Simple steps to begin your walk with Jesus. <em>(Saved privately on your device.)</em></p>
+    <h2 class="section-title">Start Here</h2>
+    <p class="section-sub">A short path to begin your new life in Christ.</p>
 
     <div class="start-grid">
-      <!-- Gospel summary -->
-      <article class="card-ui start-card">
-        <h3><i class="fa-solid fa-seedling"></i> What is the Gospel?</h3>
-        <ul class="checklist bullets">
-          <li><strong>God loves you</strong> and made you for Himself (John 3:16).</li>
-          <li><strong>Sin separates us</strong> from God (Romans 3:23).</li>
-          <li><strong>Jesus died and rose</strong> for our sins (1 Corinthians 15:3–4).</li>
-          <li><strong>Receive Him by faith</strong> — repent and believe (Mark 1:15; Romans 10:9).</li>
+      <!-- Step 1: Gospel -->
+      <div class="card-ui halo start-card">
+        <h3><i class="fa-solid fa-seedling"></i> The Good News</h3>
+        <ul class="bullets">
+          <li>God loves you and created you for relationship with Him (John 3:16).</li>
+          <li>Our sin separates us from God (Romans 3:23).</li>
+          <li>Jesus died and rose again to save us (1 Corinthians 15:3–4).</li>
+          <li>We are saved by grace through faith (Ephesians 2:8–9).</li>
         </ul>
-        <div class="d-flex gap-2 flex-wrap">
+        <div class="mt-2">
           <button class="btn btn-outline-primary btn-sm" id="prayNow"><i class="fa-solid fa-hands-praying"></i> Pray to Receive Jesus</button>
-          <button class="btn btn-outline-primary btn-sm" data-open="#gospelVerses"><i class="fa-solid fa-book-bible"></i> Key Verses</button>
+          <button class="btn btn-outline-primary btn-sm" data-open="#gospelVerses"><i class="fa-solid fa-book-bible"></i> Verses</button>
         </div>
-      </article>
+        <div id="gospelVerses" hidden class="mt-2">
+          <div class="d-flex flex-column gap-2">
+            <div class="mem-card"><div class="mem-ref">Romans 10:9</div><div class="mem-text">If you confess with your mouth that Jesus is Lord and believe in your heart…</div></div>
+            <div class="mem-card"><div class="mem-ref">Ephesians 2:8–9</div><div class="mem-text">By grace you have been saved through faith…</div></div>
+          </div>
+        </div>
+      </div>
 
-      <!-- New Believer Checklist (localStorage) -->
-      <article class="card-ui start-card">
-        <h3><i class="fa-solid fa-list-check"></i> New Believer Checklist</h3>
-        <ul id="nbChecklist" class="checklist">
-          <li><label><input type="checkbox" data-key="prayed"> I prayed to receive Jesus.</label></li>
-          <li><label><input type="checkbox" data-key="bible"> I started reading the Bible (John or Mark).</label></li>
-          <li><label><input type="checkbox" data-key="pray"> I pray daily (morning/evening).</label></li>
-          <li><label><input type="checkbox" data-key="group"> I joined a small group / church fellowship.</label></li>
-          <li><label><input type="checkbox" data-key="baptism"> I talked to a leader about baptism.</label></li>
-          <li><label><input type="checkbox" data-key="share"> I shared my decision with someone.</label></li>
+      <!-- Step 2: First 30 days -->
+      <div class="card-ui halo start-card">
+        <h3><i class="fa-solid fa-calendar-days"></i> First 30 Days</h3>
+        <p>Simple plan: John → Philippians → 1 John. 10 minutes daily.</p>
+        <div class="plan">
+          <div>Days 1–7: John 1–7</div>
+          <div>Days 8–14: John 8–14</div>
+          <div>Days 15–21: John 15–21</div>
+          <div>Days 22–30: Philippians + 1 John</div>
+        </div>
+        <div class="mt-2 d-flex gap-2 flex-wrap">
+          <button id="dlPlan" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-file-arrow-down"></i> Download Plan (.txt)</button>
+          <button id="addPlanICS" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-file-circle-plus"></i> Add to Calendar</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Next steps -->
+      <div class="card-ui halo start-card">
+        <h3><i class="fa-solid fa-person-walking-arrow-right"></i> Next Steps</h3>
+        <ul class="bullets">
+          <li>Baptism publicly declares your faith (Matthew 28:19–20).</li>
+          <li>Join a church family (Hebrews 10:24–25).</li>
+          <li>Meet a mentor—learn to pray, read, and share.</li>
         </ul>
-        <div class="text-center">
-          <button class="btn btn-outline-primary btn-sm" id="resetNB"><i class="fa-solid fa-rotate"></i> Reset</button>
+        <div class="mt-2 d-flex gap-2 flex-wrap">
+          <button id="findBaptism" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-location-dot"></i> Find Baptism Near Me</button>
+          <button id="askPrayer" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-envelope-open-text"></i> Ask for Prayer</button>
         </div>
-      </article>
+      </div>
 
-      <!-- 30-Day Starter Plan -->
-      <article class="card-ui start-card">
-        <h3><i class="fa-solid fa-calendar"></i> 30-Day Starter Plan</h3>
-        <ol class="plan">
-          <li><strong>Days 1–7</strong>: Read <em>John</em> 1–7. Pray 5–10 minutes daily.</li>
-          <li><strong>Days 8–14</strong>: Read John 8–14. Write 3 blessings daily.</li>
-          <li><strong>Days 15–21</strong>: Read John 15–21. Memorize John 14:6.</li>
-          <li><strong>Days 22–30</strong>: Read <em>Philippians</em> + <em>1 John</em>. Serve someone each day.</li>
-        </ol>
-        <div class="d-flex gap-2 flex-wrap">
-          <button class="btn btn-outline-primary btn-sm" id="addPlanICS"><i class="fa-solid fa-file-arrow-down"></i> Add Plan to Calendar</button>
-          <button class="btn btn-outline-primary btn-sm" id="dlPlan"><i class="fa-solid fa-download"></i> Download Plan (.txt)</button>
-        </div>
-      </article>
-
-      <!-- FAQ -->
-      <article class="card-ui start-card">
-        <h3><i class="fa-solid fa-circle-question"></i> New Believer FAQ</h3>
-        <details open>
-          <summary>How do I pray?</summary>
-          <p>Talk to God honestly like a child to a loving Father. Use the ACTS pattern: Adoration, Confession, Thanksgiving, Supplication.</p>
-        </details>
-        <details>
-          <summary>Which Bible should I read?</summary>
-          <p>Start with John or Mark. Use ESV or NLT in English, or Tagalog versions (ASD, TLAB) for Filipino.</p>
-        </details>
-        <details>
-          <summary>Why church?</summary>
-          <p>We grow together. Jesus designed community for encouragement, correction, and mission (Hebrews 10:24–25; Matthew 18:20).</p>
-        </details>
-        <div class="d-flex gap-2 flex-wrap mt-2">
-          <button class="btn btn-outline-primary btn-sm" id="askPrayer"><i class="fa-regular fa-paper-plane"></i> Ask for Prayer</button>
-          <button class="btn btn-outline-primary btn-sm" id="findBaptism"><i class="fa-solid fa-water"></i> Talk about Baptism</button>
-        </div>
-      </article>
-
-      <!-- Memory Verses pack -->
-      <article class="card-ui start-card">
+      <!-- Step 4: Memory Verses -->
+      <div class="card-ui halo start-card">
         <h3><i class="fa-solid fa-brain"></i> Memory Verses</h3>
-        <p class="mb-2">Tap to shuffle key verses for foundations in Christ.</p>
-        <div class="mem-card" id="memCard" role="button" tabindex="0" aria-label="Shuffle memory verse">
+        <div id="memCard" class="mem-card" tabindex="0" role="button" aria-label="Next verse">
           <div id="memRef" class="mem-ref">John 3:16</div>
           <div id="memText" class="mem-text">For God so loved the world…</div>
         </div>
-        <div class="d-flex gap-2 justify-content-center mt-2">
-          <button class="btn btn-outline-primary btn-sm" id="prevMem"><i class="fa-solid fa-chevron-left"></i></button>
-          <button class="btn btn-outline-primary btn-sm" id="nextMem"><i class="fa-solid fa-chevron-right"></i></button>
-          <button class="btn btn-outline-primary btn-sm" id="saveMem"><i class="fa-regular fa-bookmark"></i> Save</button>
+        <div class="mt-2 d-flex gap-2 justify-content-center">
+          <button id="prevMem" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-chevron-left"></i></button>
+          <button id="saveMem" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-bookmark"></i> Save</button>
+          <button id="nextMem" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
-      </article>
+        <small class="d-block mt-2 text-center muted">Tap the card or use ←/→ buttons</small>
+      </div>
+    </div>
 
-      <!-- Gospel verses (toggle) -->
-      <article class="card-ui start-card" id="gospelVerses" hidden>
-        <h3><i class="fa-solid fa-book-bible"></i> Key Gospel Verses</h3>
-        <ul class="bullets">
-          <li>Romans 3:23 — All have sinned.</li>
-          <li>Romans 6:23 — Wages of sin is death… the gift of God is eternal life in Christ Jesus.</li>
-          <li>John 14:6 — Jesus is the way, truth, and life.</li>
-          <li>Romans 10:9 — Confess with your mouth Jesus is Lord and believe in your heart…</li>
-          <li>Ephesians 2:8–9 — Saved by grace through faith, not by works.</li>
-        </ul>
-      </article>
+    <!-- New Believer Checklist -->
+    <div class="card-ui halo start-card mt-3">
+      <h3><i class="fa-solid fa-list-check"></i> New Believer Checklist</h3>
+      <ul id="nbChecklist" class="checklist">
+        <li><label><input type="checkbox" data-key="prayed"> I prayed to receive Jesus</label></li>
+        <li><label><input type="checkbox" data-key="bible"> I read the Bible today</label></li>
+        <li><label><input type="checkbox" data-key="prayer"> I prayed for someone</label></li>
+        <li><label><input type="checkbox" data-key="church"> I contacted a church/mentor</label></li>
+      </ul>
+      <div class="mt-2">
+        <button id="resetNB" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+      </div>
     </div>
   </section>
 
@@ -220,7 +210,7 @@
 
     <div class="card-ui halo verse-card" id="verse-esv">
       <div class="verse-badge"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
-      <h3>English — ESV</h3>
+      <h3>English – ESV</h3>
       <p class="verse-text" aria-live="polite">Loading…</p>
       <p class="cite-ref"></p>
 
@@ -240,21 +230,24 @@
 
   <!-- BIBLE VERSION CARDS -->
   <section id="bibles" class="container-narrow">
-    <h2 class="section-title">Explore the Holy Bible Versions</h2>
+    <div class="d-flex align-items-center justify-content-between">
+      <h2 class="section-title mb-0">Explore the Holy Bible Versions</h2>
+      <button class="btn btn-outline-primary btn-sm" data-collapse="#biblesGrid"><i class="fa-solid fa-minus"></i></button>
+    </div>
     <p class="section-sub">6 different Bibles.</p>
 
-    <div class="bible-grid">
+    <div id="biblesGrid" class="bible-grid">
       <a href="https://www.bible.com/bible/59/GEN.1.ESV" target="_blank" class="card-ui bible-card" aria-label="Open ESV Bible">
-        <i class="fas fa-book-bible" aria-hidden="true"></i><span>Holy Bible — ESV</span>
+        <i class="fas fa-book-bible" aria-hidden="true"></i><span>Holy Bible – ESV</span>
       </a>
       <a href="https://www.bible.com/tl/bible/1/GEN.1.KJV" target="_blank" class="card-ui bible-card" aria-label="Open KJV Bible">
-        <i class="fas fa-crown" aria-hidden="true"></i><span>Holy Bible — KJV</span>
+        <i class="fas fa-crown" aria-hidden="true"></i><span>Holy Bible – KJV</span>
       </a>
       <a href="https://www.bible.com/bible/116/GEN.1.NLT" target="_blank" class="card-ui bible-card" aria-label="Open NLT Bible">
-        <i class="fas fa-feather" aria-hidden="true"></i><span>Holy Bible — NLT</span>
+        <i class="fas fa-feather" aria-hidden="true"></i><span>Holy Bible – NLT</span>
       </a>
       <a href="https://www.bible.com/bible/111/GEN.1.NIV" target="_blank" class="card-ui bible-card" aria-label="Open NIV Bible">
-        <i class="fas fa-book-open" aria-hidden="true"></i><span>Holy Bible — NIV</span>
+        <i class="fas fa-book-open" aria-hidden="true"></i><span>Holy Bible – NIV</span>
       </a>
       <a href="https://www.bible.com/tl/bible/1264/GEN.1.ASD" target="_blank" class="card-ui bible-card" aria-label="Open Tagalog ASD Bible">
         <i class="fas fa-cross" aria-hidden="true"></i><span>Ang Biblia - ASD</span>
@@ -269,9 +262,13 @@
 
   <!-- TIKTOK LIVE MATERIALS -->
   <section id="tiktok-live" class="container-narrow">
-    <h2 class="section-title">TikTok Live Material Series</h2>
+    <div class="d-flex align-items-center justify-content-between">
+      <h2 class="section-title mb-0">TikTok Live Material Series</h2>
+      <button class="btn btn-outline-primary btn-sm" data-collapse="#tiktokBody"><i class="fa-solid fa-minus"></i></button>
+    </div>
     <p class="section-sub">Click below to view your PDF materials on Google Drive.</p>
-    <div class="tiktok-live">
+
+    <div id="tiktokBody" class="tiktok-live" style="gap:.75rem; flex-wrap:wrap;">
       <a
         href="https://drive.google.com/drive/folders/1u_M8Da598L7465Ro4sTPzdxuKb2t3HXV?usp=sharing"
         target="_blank" rel="noopener"
@@ -281,6 +278,11 @@
         <i class="fa-solid fa-folder-open"></i>
         <span>View PDF Materials</span>
       </a>
+
+      <!-- New: Preview in-page (lazy iframe in modal) -->
+      <button class="btn btn-outline-primary btn-sm" id="previewDrive" data-embed-src="https://drive.google.com/embeddedfolderview?id=1u_M8Da598L7465Ro4sTPzdxuKb2t3HXV#list">
+        <i class="fa-solid fa-eye"></i> Preview in Page
+      </button>
     </div>
   </section>
 
@@ -288,17 +290,20 @@
 
   <!-- DEVOTIONAL METHODS -->
   <section id="devotionals" class="container-narrow">
-    <h2 class="section-title">How to Do Devotionals</h2>
+    <div class="d-flex align-items-center justify-content-between">
+      <h2 class="section-title mb-0">How to Do Devotionals</h2>
+      <button class="btn btn-outline-primary btn-sm" data-collapse="#devosGrid"><i class="fa-solid fa-minus"></i></button>
+    </div>
     <p class="section-sub">Three simple frameworks to help you meet with Jesus daily.</p>
 
-    <div class="devotion-grid">
+    <div id="devosGrid" class="devotion-grid">
       <div class="devotion-card">
         <h3><i class="fa-solid fa-book-open"></i> SOAP Method</h3>
         <ul>
-          <li><strong>S — Scripture:</strong> Write down the verse(s) you are reading.</li>
-          <li><strong>O — Observation:</strong> Note what stands out—keywords, context, who’s speaking.</li>
-          <li><strong>A — Application:</strong> How does it apply to your life today?</li>
-          <li><strong>P — Prayer:</strong> Write a personal prayer based on the lesson.</li>
+          <li><strong>S – Scripture:</strong> Write down the verse(s) you are reading.</li>
+          <li><strong>O – Observation:</strong> Note what stands out—keywords, context, who’s speaking.</li>
+          <li><strong>A – Application:</strong> How does it apply to your life today?</li>
+          <li><strong>P – Prayer:</strong> Write a personal prayer based on the lesson.</li>
         </ul>
         <p class="example">📖 Example: Philippians 4:6–7 → Not to worry but pray. I need to trust God with my anxieties today.</p>
         <div class="devotion-links">
@@ -310,10 +315,10 @@
       <div class="devotion-card">
         <h3><i class="fa-solid fa-hands-praying"></i> ACTS Method</h3>
         <ul>
-          <li><strong>A — Adoration:</strong> Praise God for who He is.</li>
-          <li><strong>C — Confession:</strong> Write honestly the sins/struggles you need to bring to Him.</li>
-          <li><strong>T — Thanksgiving:</strong> Note what you’re grateful for.</li>
-          <li><strong>S — Supplication:</strong> Ask God for help—for yourself and others.</li>
+          <li><strong>A – Adoration:</strong> Praise God for who He is.</li>
+          <li><strong>C – Confession:</strong> Write honestly the sins/struggles you need to bring to Him.</li>
+          <li><strong>T – Thanksgiving:</strong> Note what you’re grateful for.</li>
+          <li><strong>S – Supplication:</strong> Ask God for help—for yourself and others.</li>
         </ul>
         <p class="example">📖 Example: “Lord, You are my peace. Forgive my impatience. Thank You for guiding me yesterday. Please help me forgive others today.”</p>
         <div class="devotion-links">
@@ -325,10 +330,10 @@
       <div class="devotion-card">
         <h3><i class="fa-solid fa-highlighter"></i> HEAR Method</h3>
         <ul>
-          <li><strong>H — Highlight:</strong> Choose and highlight the key verse.</li>
-          <li><strong>E — Explain:</strong> Write what the verse means in context.</li>
-          <li><strong>A — Apply:</strong> How does it impact your daily walk?</li>
-          <li><strong>R — Respond:</strong> Write a personal response or prayer.</li>
+          <li><strong>H – Highlight:</strong> Choose and highlight the key verse.</li>
+          <li><strong>E – Explain:</strong> Write what the verse means in context.</li>
+          <li><strong>A – Apply:</strong> How does it impact your daily walk?</li>
+          <li><strong>R – Respond:</strong> Write a personal response or prayer.</li>
         </ul>
         <p class="example">📖 Example: John 15:5 → Apart from Jesus I can do nothing. I must depend on Him in my work today.</p>
         <div class="devotion-links">
@@ -342,24 +347,27 @@
   <!-- Devotional Resources -->
   <section id="devotional-resources" class="container-narrow">
     <h2 class="section-title">More Devotional Resources</h2>
-    <p class="section-sub">As you seek His kingdom, He provides everything for your path — remember Matthew 6:33.</p>
+    <p class="section-sub">As you seek his kingdom, he provides everything for your path remember, Matthew 6:33</p>
     <div class="tiktok-live" style="gap:.75rem; flex-wrap:wrap;">
       <a href="https://www.bible.com/reading-plans" target="_blank" rel="noopener" aria-label="Explore Bible reading plans"><i class="fas fa-list-check"></i> Bible Plans</a>
       <a href="https://open.spotify.com/search/worship%20songs%20playlist" target="_blank" rel="noopener" aria-label="Check Spotify worship songs playlists"><i class="fas fa-music"></i> Worship Songs</a>
     </div>
-    <p class="section-sub" style="text-align:center; margin-top:.75rem;">Bible Plans — search a website that showcases Bible plans. &nbsp;|&nbsp; Worship Songs — Check Spotify for free worship songs</p>
+    <p class="section-sub" style="text-align:center; margin-top:.75rem;">Bible Plans - search a website that showcases Bible plans. &nbsp;|&nbsp; Worship Songs - Check Spotify for free worship songs</p>
   </section>
 
   <div class="section-divider"><hr></div>
 
   <!-- TOOLS -->
   <section id="tools" class="container-narrow">
-    <h2 class="section-title">Tools to Help Your Walk</h2>
+    <div class="d-flex align-items-center justify-content-between">
+      <h2 class="section-title mb-0">Tools to Help Your Walk</h2>
+      <button class="btn btn-outline-primary btn-sm" data-collapse="#toolsGrid"><i class="fa-solid fa-minus"></i></button>
+    </div>
     <p class="section-sub">Timers, streaks, reminders, verse lookup—and more.</p>
 
-    <div class="tools-grid">
+    <div id="toolsGrid" class="tools-grid">
       <!-- Timer -->
-      <div class="card-ui halo tool-card" id="timerCard">
+      <div class="card-ui halo tool-card gradient-card" id="timerCard">
         <h3 class="mb-1"><i class="fa-solid fa-hourglass-half"></i> Devotional Timer</h3>
         <div class="timer-pills" aria-label="Quick durations">
           <button data-min="5">5m</button>
@@ -408,7 +416,7 @@
         <p class="mb-2">Spread the Good News.</p>
         <div class="text-center">
           <button class="btn btn-outline-primary btn-sm" id="shareSite"><i class="fa-solid fa-share-from-square"></i> Share This Site</button>
-          <button class="btn btn-outline-primary btn-sm" id="openQR"><i class="fa-solid fa-qrcode"></i> QR Invite</button>
+          <button class="btn btn-outline-primary btn-sm" id="openQR"><i class="fa-solid fa-qrcode"></i> QR</button>
         </div>
         <small class="d-block mt-2 text-center" style="color:var(--muted);">Web Share when available.</small>
       </div>
@@ -449,7 +457,7 @@
             <option value="Luke 10:25-37">Good Samaritan (Luke 10:25–37)</option>
             <option value="Luke 15:11-32">Prodigal Son (Luke 15:11–32)</option>
             <option value="Matthew 14:22-33">Jesus Walks on Water (Matt 14:22–33)</option>
-            <option value="John 19:16-30">Crucifixion (John 19:16-30)</option>
+            <option value="John 19:16-30">Crucifixion (John 19:16–30)</option>
             <option value="Luke 24:1-12">Resurrection (Luke 24:1–12)</option>
             <option value="Matthew 28:16-20">Great Commission (Matt 28:16–20)</option>
             <option value="Acts 2:1-41">Pentecost (Acts 2:1–41)</option>
@@ -472,7 +480,7 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div id="qrcode"></div>
+          <div id="qrcode" style="display:flex;justify-content:center;padding:1rem;"></div>
           <p class="text-center muted mb-0">Scan to open this page.</p>
         </div>
       </div>
@@ -520,11 +528,36 @@
     </div>
   </div>
 
+  <!-- Generic Embed Modal (lazy iframe for materials, etc.) -->
+  <div class="modal fade" id="embedModal" tabindex="-1" aria-labelledby="embedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-sm-down modal-xl">
+      <div class="modal-content modal-dark">
+        <div class="modal-header">
+          <h5 class="modal-title" id="embedModalLabel"><i class="fa-solid fa-eye"></i> Preview</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" id="embedClose"></button>
+        </div>
+        <div class="modal-body">
+          <div id="embedSkeleton" class="text-center mb-2">
+            <div class="placeholder-wave">
+              <span class="placeholder col-12" style="height:18px;display:block;margin-bottom:8px;"></span>
+              <span class="placeholder col-12" style="height:18px;display:block;margin-bottom:8px;"></span>
+              <span class="placeholder col-12" style="height:18px;display:block;"></span>
+            </div>
+          </div>
+          <iframe id="embedFrame" title="Embedded preview" style="width:100%;height:70vh;border:0;display:none;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="section-divider"><hr></div>
 
   <!-- JOURNAL + Story of the Day -->
   <section id="journal" class="container-narrow">
-    <h2 class="section-title">Prayer Journal</h2>
+    <div class="d-flex align-items-center justify-content-between">
+      <h2 class="section-title mb-0">Prayer Journal</h2>
+      <button class="btn btn-outline-primary btn-sm" data-collapse="#journalBody"><i class="fa-solid fa-minus"></i></button>
+    </div>
     <p class="section-sub">Write your prayers, reflections, and gratitude to Jesus. Saved locally.</p>
 
     <!-- Bible Story of the Day -->
@@ -538,15 +571,15 @@
       <small class="d-block mt-2 text-center" style="color:var(--muted);">Scripture-based reference (WEB).</small>
     </div>
 
-    <div class="row g-3">
+    <div id="journalBody" class="row g-3">
       <div class="col-12 col-lg-6">
-        <div class="card-ui halo journal-wrap gradient-card">
+        <div class="card-ui halo journal-wrap gradient-card" style="padding:1rem;">
           <h3 class="mb-2"><i class="fa-solid fa-pen-to-square"></i> New Entry</h3>
           <textarea id="journalText" placeholder="Dear Jesus…"></textarea>
           <div class="journal-actions">
             <button id="saveJournal" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save</button>
             <button id="exportJournal" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-file-arrow-down"></i> Export .txt</button>
-            <button id="clearJournal" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-trash"></i> Clear All</button>
+            <button id="clearJournal" class="btn btn-outline-primary btn-sm btn-danger"><i class="fa-solid fa-trash"></i> Clear All</button>
           </div>
         </div>
       </div>
@@ -575,7 +608,7 @@
 
       <section id="church" class="card-ui halo card-box">
         <h2 class="section-title" style="margin-bottom:.5rem;">Why is it IMPORTANT to join a church?</h2>
-        <p class="section-sub" style="margin-bottom:.75rem;">We grow best together — Jesus said, <em>“For where two or three are gathered together in my name, there am I in the midst of them.”</em> — <strong>Matthew 18:20</strong>. The enemy loves isolation; fellowship strengthens faith.</p>
+        <p class="section-sub" style="margin-bottom:.75rem;">We grow best together - Jesus said, <em>“For where two or three are gathered together in my name, there am I in the midst of them.”</em> — <strong>Matthew 18:20</strong>. The enemy loves isolation; fellowship strengthens faith.</p>
         <p class="section-sub" style="margin-bottom:.75rem;"><strong>Why I chose CCF:</strong> CCF was the first Christian church God connected me to. The Lord drew me to know Jesus personally and this church became my home. My denomination is <em>Jesus Christ alone</em>, but CCF has helped me grow through discipleship and community. Their mission is “to honor God and make Christ-committed followers who will make Christ-committed followers,” embodying Matthew 28:18-20. If you’re looking for a place to start, you can visit their site below.</p>
         <p class="d-flex gap-2 justify-content-center flex-wrap">
           <a href="https://www.ccf.org.ph" target="_blank" rel="noopener" class="btn btn-outline-primary">Visit CCF Website</a>
@@ -605,9 +638,96 @@
   <!-- BACK TO TOP -->
   <button class="back-to-top" id="backTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
+  <!-- SETTINGS MODAL (NEW) -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content modal-dark">
+        <div class="modal-header">
+          <h5 class="modal-title" id="settingsModalLabel"><i class="fa-solid fa-gear"></i> Settings</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Appearance -->
+          <h6 class="mb-2">Appearance</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="prefCompact">
+            <label class="form-check-label" for="prefCompact">Compact mode (denser layout)</label>
+          </div>
+          <div class="form-check mt-1">
+            <input class="form-check-input" type="checkbox" id="prefContrast">
+            <label class="form-check-label" for="prefContrast">High contrast mode</label>
+          </div>
+
+          <!-- Language -->
+          <hr class="my-3"/>
+          <h6 class="mb-2">Language</h6>
+          <select id="prefLang" class="form-select form-select-sm" style="max-width:220px;">
+            <option value="en" selected>English (EN)</option>
+            <option value="tl">Tagalog (TL)</option>
+          </select>
+          <small class="d-block mt-1 muted">UI text updates instantly. (Scripture translation remains ESV/WEB for now.)</small>
+
+          <!-- Section Visibility -->
+          <hr class="my-3"/>
+          <h6 class="mb-2">Show Sections</h6>
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="secStartHere" checked>
+                <label class="form-check-label" for="secStartHere">Start Here</label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="secBibles" checked>
+                <label class="form-check-label" for="secBibles">Bibles</label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="secDevos" checked>
+                <label class="form-check-label" for="secDevos">Devotionals</label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="secTools" checked>
+                <label class="form-check-label" for="secTools">Tools</label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="secJournal" checked>
+                <label class="form-check-label" for="secJournal">Journal</label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="secMaterials" checked>
+                <label class="form-check-label" for="secMaterials">Materials</label>
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-3" />
+          <button id="prefsReset" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-rotate-left"></i> Reset to Defaults</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY BOTTOM BAR (MOBILE) -->
+  <nav class="bottom-bar d-md-none">
+    <a href="#landing" class="bottom-item" aria-label="Go to Daily Verse"><i class="fa-solid fa-bible"></i><span>Verse</span></a>
+    <a href="#start-here" class="bottom-item" aria-label="Go to Start Here"><i class="fa-solid fa-star"></i><span>Start</span></a>
+    <a href="#journal" class="bottom-item" aria-label="Go to Journal"><i class="fa-solid fa-pen-to-square"></i><span>Journal</span></a>
+    <button class="bottom-item" id="bottomSettings" aria-label="Open Settings"><i class="fa-solid fa-gear"></i><span>Settings</span></button>
+  </nav>
+
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-  <!-- Site JS -->
+
+  <!-- App Script -->
   <script src="script.js" defer></script>
 </body>
 </html>
