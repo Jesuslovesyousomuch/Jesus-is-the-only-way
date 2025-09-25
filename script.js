@@ -205,58 +205,152 @@ on($('#btnSpeakVerse'), 'click', ()=>{
   const v=currentVerse(); const u=new SpeechSynthesisUtterance(`${v.text}. ${v.ref}`); u.lang='en-US'; speechSynthesis.cancel(); speechSynthesis.speak(u);
 });
 
-/* Image export */
-function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight){
-  const words=text.split(' '); let line='';
-  for (let n = 0; n < words.length; n++) {
-    const testLine = line + words[n] + ' ';
-    const testWidth = ctx.measureText(testLine).width;
-    if (testWidth > maxWidth && n > 0) {
-      ctx.fillText(line, x, y);
-      line = words[n] + ' ';
-      y += lineHeight;
+/* ------------------ Robust canvas text & export ------------------ */
+/* Wait for Inter font to be ready before measuring/drawing */
+async function ensureInterLoaded(){
+  try{
+    if (document.fonts && document.fonts.ready) {
+      // Nudge the browser by requesting the weights we use.
+      await Promise.allSettled([
+        document.fonts.load('bold 44px "Inter"'),
+        document.fonts.load('bold 36px "Inter"'),
+        document.fonts.load('600 20px "Inter"'),
+        document.fonts.ready
+      ]);
+    }
+  }catch{}
+}
+
+/* Wrap text to lines within width using current ctx.font */
+function wrapLines(ctx, text, maxWidth){
+  const words = (text || '').split(/\s+/);
+  const lines = [];
+  let line = '';
+  for (let i=0;i<words.length;i++){
+    const test = line ? line + ' ' + words[i] : words[i];
+    if (ctx.measureText(test).width <= maxWidth) {
+      line = test;
     } else {
-      line = testLine;
+      if (line) lines.push(line);
+      line = words[i];
     }
   }
-  ctx.fillText(line, x, y);
-  return y;
+  if (line) lines.push(line);
+  return lines;
 }
-function drawVerseToCanvas() {
+
+/* Fit text by reducing font size until it fits both width and maxLines/height */
+function fitAndDrawText(ctx, text, x, y, maxWidth, maxHeight, opts){
+  const { fontFamily='Inter, system-ui, sans-serif', weight='bold', maxPx=44, minPx=22, lineGap=1.35, align='left' } = opts || {};
+  ctx.textAlign = align;
+  ctx.textBaseline = 'top';
+  let size = maxPx;
+  let lines, lineHeight;
+
+  while (size >= minPx) {
+    ctx.font = `${weight} ${size}px ${fontFamily}`;
+    lines = wrapLines(ctx, text, maxWidth);
+    lineHeight = size * lineGap;
+    const totalH = lines.length * lineHeight;
+    if (totalH <= maxHeight) break;
+    size -= 2;
+  }
+
+  // If still too tall, hard-wrap by truncating and adding ellipsis
+  if (size < minPx) {
+    size = minPx;
+    ctx.font = `${weight} ${size}px ${fontFamily}`;
+    lines = wrapLines(ctx, text, maxWidth);
+    lineHeight = size * lineGap;
+    const maxLines = Math.max(1, Math.floor(maxHeight / lineHeight));
+    if (lines.length > maxLines){
+      const clipped = lines.slice(0, maxLines);
+      // add ellipsis to last line if clipped
+      let last = clipped.pop() || '';
+      while (ctx.measureText(last + '…').width > maxWidth && last.length > 3){
+        last = last.slice(0, -2);
+      }
+      clipped.push(last + '…');
+      lines = clipped;
+    }
+  }
+
+  // Draw
+  let yy = y;
+  ctx.shadowColor = 'rgba(0,0,0,0.25)';
+  ctx.shadowBlur = 4;
+  ctx.fillStyle = '#ffffff';
+  for (const ln of lines){
+    ctx.fillText(ln, x, yy);
+    yy += lineHeight;
+  }
+  ctx.shadowBlur = 0;
+
+  return yy; // returns next y
+}
+
+async function drawVerseToCanvas() {
+  await ensureInterLoaded(); // critical: ensure font metrics are stable
+
   const { text, ref } = currentVerse();
   const canvas = $('#verseCanvas');
   const ctx = canvas.getContext('2d');
   const W = canvas.width, H = canvas.height;
 
+  // background
   const grad = ctx.createLinearGradient(0, 0, W, H);
   grad.addColorStop(0, '#0b264c'); grad.addColorStop(1, '#08152a');
   ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
 
+  // soft circles
   ctx.fillStyle = 'rgba(255,255,255,0.06)';
   for (let i=0;i<6;i++){ ctx.beginPath(); ctx.arc(80 + i*180, 120 + (i%2)*60, 60, 0, Math.PI*2); ctx.fill(); }
 
-  ctx.fillStyle = '#9fd1ff'; ctx.font = 'bold 36px Inter, system-ui, sans-serif'; ctx.fillText('Daily Bible Verse', 60, 80);
+  // Title
+  ctx.fillStyle = '#9fd1ff';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
+  ctx.font = 'bold 36px Inter, system-ui, sans-serif';
+  ctx.fillText('Daily Bible Verse', 60, 80);
 
-  ctx.fillStyle = '#ffffff'; ctx.font = 'bold 44px Inter, system-ui, sans-serif'; ctx.textBaseline = 'top'; ctx.shadowColor = 'rgba(0,0,0,0.25)'; ctx.shadowBlur = 4;
-  const maxWidth = W - 120; let y = 140; const trySizes = [44, 40, 36, 32, 28];
-  for (const size of trySizes){
-    ctx.font = `bold ${size}px Inter, system-ui, sans-serif`;
-    const measure = ctx.measureText(text);
-    if (size === trySizes[trySizes.length-1] || measure.width / maxWidth < 3.5) {
-      y = wrapCanvasText(ctx, text, 60, y, maxWidth, size * 1.35) + 24; break;
-    }
-  }
-  ctx.shadowBlur = 0; ctx.fillStyle = '#9fd1ff'; ctx.font = 'bold 32px Inter, system-ui, sans-serif'; ctx.fillText(ref || '', 60, y);
+  // Verse (autoscale + wrap inside padding box)
+  const PAD = 60;
+  const innerW = W - PAD*2;
+  const verseTop = 120;
+  const verseBoxH = H - verseTop - 140; // leave space for ref + footer
 
-  ctx.fillStyle = 'rgba(255,255,255,0.85)'; ctx.font = '600 20px Inter, system-ui, sans-serif';
-  const footer = 'jesuslovesyousomuch.github.io/Jesus-is-the-only-way'; ctx.fillText(footer, 60, H - 60);
+  const nextY = fitAndDrawText(
+    ctx,
+    text || '',
+    PAD, verseTop,
+    innerW, verseBoxH,
+    { fontFamily:'Inter, system-ui, sans-serif', weight:'bold', maxPx:44, minPx:24, lineGap:1.35, align:'left' }
+  ) + 20;
+
+  // Reference
+  ctx.fillStyle = '#9fd1ff';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.font = 'bold 32px Inter, system-ui, sans-serif';
+  ctx.fillText(ref || '', PAD, nextY);
+
+  // Footer
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
+  ctx.font = '600 20px Inter, system-ui, sans-serif';
+  const footer = 'jesuslovesyousomuch.github.io/Jesus-is-the-only-way';
+  ctx.fillText(footer, PAD, H - 40);
 }
-on($('#btnImageVerse'), 'click', () => {
-  drawVerseToCanvas();
+
+on($('#btnImageVerse'), 'click', async () => {
+  await drawVerseToCanvas();
   const canvas = $('#verseCanvas');
   const link = document.createElement('a');
   const safeRef = (currentVerse().ref || 'verse').replace(/[^a-z0-9\-_. ]/gi,'_').slice(0,60);
-  link.download = `${safeRef}.png`; link.href = canvas.toDataURL('image/png'); link.click();
+  link.download = `${safeRef}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
 });
 
 /* Open passage / fullscreen */
