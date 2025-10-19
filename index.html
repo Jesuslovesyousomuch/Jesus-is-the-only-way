@@ -6,7 +6,7 @@
   <title>Jesus Loves You</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230b2c5a'/><path d='M30 10h4v16h16v4H34v24h-4V30H14v-4h16z' fill='%23fff'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230b2c5a'/><path d='M30 10h4v16h16v4H34v24h-4V30H14v-4h16z' fill='%23fff'/></svg>'>
 
   <!-- Meta -->
   <meta name="description" content="Pointing people to Jesus with daily Bible verses and quick links to six Bible versions." />
@@ -64,8 +64,7 @@
   <header>
     <div class="nav-container">
       <div class="logo">
-        <i class="fas fa-cross" aria-hidden="true"></i>
-        Jesus Loves You
+        <i class="fas fa-cross" aria-hidden="true"></i> Jesus Loves You
       </div>
 
       <!-- Quick controls -->
@@ -78,7 +77,9 @@
       </div>
 
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
-      <nav id="mainNav" aria-label="Primary">
+
+      <!-- NOTE: Added class="compact" to enable CSS-only hover/focus expansion on desktop -->
+      <nav id="mainNav" class="compact" aria-label="Primary">
         <ul>
           <li><a href="#landing"><i class="fas fa-bible" aria-hidden="true"></i><span class="label">Home</span></a></li>
           <li><a href="#start-here"><i class="fas fa-star" aria-hidden="true"></i><span class="label">Start Here</span></a></li>
@@ -213,7 +214,6 @@
       <h3>English – ESV</h3>
       <p class="verse-text" aria-live="polite">Loading…</p>
       <p class="cite-ref"></p>
-
       <div class="verse-actions" aria-label="Verse actions">
         <button class="btn btn-outline-primary btn-sm" id="btnCopyVerse"><i class="fa-solid fa-copy"></i> Copy</button>
         <button class="btn btn-outline-primary btn-sm" id="btnShareVerse"><i class="fa-solid fa-share"></i> Share</button>
@@ -230,9 +230,9 @@
 
   <!-- BIBLE VERSION CARDS -->
   <section id="bibles" class="container-narrow">
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="section-head">
       <h2 class="section-title mb-0">Explore the Holy Bible Versions</h2>
-      <button class="btn btn-outline-primary btn-sm" data-collapse="#biblesGrid"><i class="fa-solid fa-minus"></i></button>
+      <button class="head-toggle btn btn-outline-primary btn-sm" data-collapse="#biblesGrid" aria-expanded="true" aria-controls="biblesGrid"><i class="fa-solid fa-minus"></i></button>
     </div>
     <p class="section-sub">6 different Bibles.</p>
 
@@ -262,23 +262,16 @@
 
   <!-- TIKTOK LIVE MATERIALS -->
   <section id="tiktok-live" class="container-narrow">
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="section-head">
       <h2 class="section-title mb-0">TikTok Live Material Series</h2>
-      <button class="btn btn-outline-primary btn-sm" data-collapse="#tiktokBody"><i class="fa-solid fa-minus"></i></button>
+      <button class="head-toggle btn btn-outline-primary btn-sm" data-collapse="#tiktokBody" aria-expanded="true" aria-controls="tiktokBody"><i class="fa-solid fa-minus"></i></button>
     </div>
     <p class="section-sub">Click below to view your PDF materials on Google Drive.</p>
 
     <div id="tiktokBody" class="tiktok-live" style="gap:.75rem; flex-wrap:wrap;">
-      <a
-        href="https://drive.google.com/drive/folders/1u_M8Da598L7465Ro4sTPzdxuKb2t3HXV?usp=sharing"
-        target="_blank" rel="noopener"
-        aria-label="Open Google Drive folder for TikTok materials"
-        class="btn-drive"
-      >
-        <i class="fa-solid fa-folder-open"></i>
-        <span>View PDF Materials</span>
+      <a href="https://drive.google.com/drive/folders/1u_M8Da598L7465Ro4sTPzdxuKb2t3HXV?usp=sharing" target="_blank" rel="noopener" aria-label="Open Google Drive folder for TikTok materials" class="btn-drive">
+        <i class="fa-solid fa-folder-open"></i> <span>View PDF Materials</span>
       </a>
-
       <!-- New: Preview in-page (lazy iframe in modal) -->
       <button class="btn btn-outline-primary btn-sm" id="previewDrive" data-embed-src="https://drive.google.com/embeddedfolderview?id=1u_M8Da598L7465Ro4sTPzdxuKb2t3HXV#list">
         <i class="fa-solid fa-eye"></i> Preview in Page
@@ -290,14 +283,14 @@
 
   <!-- DEVOTIONAL METHODS -->
   <section id="devotionals" class="container-narrow">
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="section-head">
       <h2 class="section-title mb-0">How to Do Devotionals</h2>
-      <button class="btn btn-outline-primary btn-sm" data-collapse="#devosGrid"><i class="fa-solid fa-minus"></i></button>
+      <button class="head-toggle btn btn-outline-primary btn-sm" data-collapse="#devosGrid" aria-expanded="true" aria-controls="devosGrid"><i class="fa-solid fa-minus"></i></button>
     </div>
     <p class="section-sub">Three simple frameworks to help you meet with Jesus daily.</p>
 
     <div id="devosGrid" class="devotion-grid">
-      <div class="devotion-card">
+      <div class="devotion-card card-ui">
         <h3><i class="fa-solid fa-book-open"></i> SOAP Method</h3>
         <ul>
           <li><strong>S – Scripture:</strong> Write down the verse(s) you are reading.</li>
@@ -312,7 +305,7 @@
         </div>
       </div>
 
-      <div class="devotion-card">
+      <div class="devotion-card card-ui">
         <h3><i class="fa-solid fa-hands-praying"></i> ACTS Method</h3>
         <ul>
           <li><strong>A – Adoration:</strong> Praise God for who He is.</li>
@@ -327,7 +320,7 @@
         </div>
       </div>
 
-      <div class="devotion-card">
+      <div class="devotion-card card-ui">
         <h3><i class="fa-solid fa-highlighter"></i> HEAR Method</h3>
         <ul>
           <li><strong>H – Highlight:</strong> Choose and highlight the key verse.</li>
@@ -348,10 +341,12 @@
   <section id="devotional-resources" class="container-narrow">
     <h2 class="section-title">More Devotional Resources</h2>
     <p class="section-sub">As you seek his kingdom, he provides everything for your path remember, Matthew 6:33</p>
+
     <div class="tiktok-live" style="gap:.75rem; flex-wrap:wrap;">
       <a href="https://www.bible.com/reading-plans" target="_blank" rel="noopener" aria-label="Explore Bible reading plans"><i class="fas fa-list-check"></i> Bible Plans</a>
       <a href="https://open.spotify.com/search/worship%20songs%20playlist" target="_blank" rel="noopener" aria-label="Check Spotify worship songs playlists"><i class="fas fa-music"></i> Worship Songs</a>
     </div>
+
     <p class="section-sub" style="text-align:center; margin-top:.75rem;">Bible Plans - search a website that showcases Bible plans. &nbsp;|&nbsp; Worship Songs - Check Spotify for free worship songs</p>
   </section>
 
@@ -359,9 +354,9 @@
 
   <!-- TOOLS -->
   <section id="tools" class="container-narrow">
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="section-head">
       <h2 class="section-title mb-0">Tools to Help Your Walk</h2>
-      <button class="btn btn-outline-primary btn-sm" data-collapse="#toolsGrid"><i class="fa-solid fa-minus"></i></button>
+      <button class="head-toggle btn btn-outline-primary btn-sm" data-collapse="#toolsGrid" aria-expanded="true" aria-controls="toolsGrid"><i class="fa-solid fa-minus"></i></button>
     </div>
     <p class="section-sub">Timers, streaks, reminders, verse lookup—and more.</p>
 
@@ -554,9 +549,9 @@
 
   <!-- JOURNAL + Story of the Day -->
   <section id="journal" class="container-narrow">
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="section-head">
       <h2 class="section-title mb-0">Prayer Journal</h2>
-      <button class="btn btn-outline-primary btn-sm" data-collapse="#journalBody"><i class="fa-solid fa-minus"></i></button>
+      <button class="head-toggle btn btn-outline-primary btn-sm" data-collapse="#journalBody" aria-expanded="true" aria-controls="journalBody"><i class="fa-solid fa-minus"></i></button>
     </div>
     <p class="section-sub">Write your prayers, reflections, and gratitude to Jesus. Saved locally.</p>
 
@@ -726,7 +721,6 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-
   <!-- App Script -->
   <script src="script.js" defer></script>
 </body>
